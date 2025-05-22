@@ -1,33 +1,35 @@
 let gameSeq = [];
 let userSeq = [];
+let highestScore = 0;
 
 let btns = ["yellow", "purple", "green", "red"];
 let started = false; 
 let level = 0;
 
 let h2 = document.querySelector("h2");
+let h1 = document.querySelector("h1");
+let h3 = document.querySelector("h3");
+
+// Display highest score initially
+h3.innerHTML = `Highest Score: <b>${highestScore}</b>`;
+h3.style.color = "green";
 
 document.addEventListener("keypress", function() {
-    if(started == false) {
+    if (!started) {
         console.log("Game started");
-        started = true; 
-
+        started = true;
         levelUp();
     }
-})
+});
 
 function gameFlash(btn) {
     btn.classList.add("flash");
-    setTimeout(function() {
-        btn.classList.remove("flash");
-    }, 250);
+    setTimeout(() => btn.classList.remove("flash"), 250);
 }
 
 function userFlash(btn) {
     btn.classList.add("userflash");
-    setTimeout(function() {
-        btn.classList.remove("userflash");
-    }, 250);
+    setTimeout(() => btn.classList.remove("userflash"), 250);
 }
 
 function levelUp() {
@@ -40,26 +42,29 @@ function levelUp() {
     let randBtn = document.querySelector(`.${randColor}`);
     gameSeq.push(randColor);
 
-    // console.log(randIdx);
-    // console.log(randColor);
-    // console.log(randBtn);
-    
     gameFlash(randBtn);
 }
 
 function checkAns(idx) {
-    // let idx = level - 1;
     if (userSeq[idx] === gameSeq[idx]) {
-        if (userSeq.length == gameSeq.length) {
+        if (userSeq.length === gameSeq.length) {
             setTimeout(levelUp, 1000);
         }
-    }
-    else{
+    } else {
         h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press Any Key to Restart`;
-        document.querySelector("body").style.backgroundColor = "red";
-        setTimeout( function () {
-            document.querySelector("body").style.backgroundColor = "white";
+
+        // Flash red
+        document.body.style.backgroundColor = "red";
+        setTimeout(() => {
+            document.body.style.backgroundColor = "white";
         }, 250);
+
+        // Update highest score
+        if (level > highestScore) {
+            highestScore = level;
+        }
+        h3.innerHTML = `Highest Score: <b>${highestScore}</b>`;
+
         restart();
     }
 }
@@ -68,11 +73,10 @@ function btnPress() {
     let btn = this;
     userFlash(btn);
 
-    userColor = btn.getAttribute("id");
+    let userColor = btn.getAttribute("id");
     userSeq.push(userColor);
 
     checkAns(userSeq.length - 1);
-
 }
 
 function restart() {
@@ -83,6 +87,6 @@ function restart() {
 }
 
 let allBtns = document.querySelectorAll(".btn");
-for (btn of allBtns) {
+for (let btn of allBtns) {
     btn.addEventListener("click", btnPress);
 }
