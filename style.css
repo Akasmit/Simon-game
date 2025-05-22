@@ -1,13 +1,36 @@
 body{
   text-align: center;
+  background-color: rgb(0, 0, 0);
+}
+
+h1 {
+  color: brown;
+}
+h2 {
+  color: green;
+}
+h3 {
+  color: blue;
+}
+span {
+  color: green;
 }
 
 .btn {
   height: 200px;
   width: 200px;
   border-radius: 20%;
-  border: 10px solid black;
+  border: 10px solid rgb(0, 0, 0);
   margin: 2.5rem;
+  background-color: #4CAF50; /* example background */
+  color: white;
+  transition: background-color 0.2s ease, opacity 0.2s ease; /* smooth transition */
+  cursor: pointer;
+}
+
+/* Fade effect on click */
+.btn:active {
+  opacity: 0.7; /* slightly faded */
 }
 
 .btn-container {

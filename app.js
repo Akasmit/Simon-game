@@ -12,7 +12,6 @@ let h3 = document.querySelector("h3");
 
 // Display highest score initially
 h3.innerHTML = `Highest Score: <b>${highestScore}</b>`;
-h3.style.color = "green";
 
 document.addEventListener("keypress", function() {
     if (!started) {
@@ -51,12 +50,13 @@ function checkAns(idx) {
             setTimeout(levelUp, 1000);
         }
     } else {
-        h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> Press Any Key to Restart`;
+        h2.innerHTML = `Game Over! Your score was <b>${level}</b> <br> <span>Press any key to Restart</span>`;
+        h2.style.color = "yellow";
 
         // Flash red
         document.body.style.backgroundColor = "red";
         setTimeout(() => {
-            document.body.style.backgroundColor = "white";
+            document.body.style.backgroundColor = "black";
         }, 250);
 
         // Update highest score
