@@ -6,6 +6,8 @@ let btns = ["yellow", "purple", "green", "red"];
 let started = false; 
 let level = 0;
 
+let startBtn = document.getElementById("startBtn");
+
 let h2 = document.querySelector("h2");
 let h1 = document.querySelector("h1");
 let h3 = document.querySelector("h3");
@@ -13,13 +15,17 @@ let h3 = document.querySelector("h3");
 // Display highest score initially
 h3.innerHTML = `Highest Score: <b>${highestScore}</b>`;
 
-document.addEventListener("keypress", function() {
+function startGame() {
     if (!started) {
         console.log("Game started");
         started = true;
         levelUp();
+        startBtn.style.display = "none"; // Hide button after game starts
     }
-});
+}
+
+document.addEventListener("keypress", startGame);
+startBtn.addEventListener("click", startGame);
 
 function gameFlash(btn) {
     btn.classList.add("flash");
@@ -78,6 +84,8 @@ function btnPress() {
 
     checkAns(userSeq.length - 1);
 }
+
+
 
 function restart() {
     gameSeq = [];
