@@ -15,7 +15,7 @@ h3 {
 span {
   color: green;
 }
-#startBtn {
+.startBtn {
     padding: 10px 20px;
     font-size: 18px;
     margin: 20px;
